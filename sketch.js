@@ -1,19 +1,18 @@
 
 let myCanvas;
 
-function preload() {
+let homePage;
+let endPage;
 
-  myFont = loadFont('AnticSlab-Regular.ttf');
+
+function preload() {
+  myFont = loadFont('Josefin Sans Light.ttf');
 }
 
 function setup() {
   myCanvas = createCanvas(400, 400);
   myCanvas.parent('myCanvas');
-
-
 }
 
 function draw() {
 }
-
-f
