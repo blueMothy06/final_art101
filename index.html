@@ -7,15 +7,44 @@
   <script src="p5.min.js"></script>
   <script src="p5.clickable.js"></script>
   <meta charset="utf-8">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <div id="myCanvas">
+
+  <div class="flex-container">
+    <div id="myCanvas">
       <script src="sketch.js"></script>
     </div>
+
+    <p id="story">
+      <span>
+        (Click to start the story!)
+      </span>
+    </p>
+  </div>
+  <a id="button" href='art_state.html'>Artist Statement</a>
+
+  <script>
+    let counter = 0;
+    let narration = new Array("a", "There comes a dark time in everyone's life.",
+      "c", "You know those moments. Ones you won't even admit to just anyone.",
+      "d", "You didn’t really want to do it.",
+      "e", "You see, there’s other ways of getting what you want.",
+      "f", "It may or may not involve getting out of the house and asking other people, but who really has the time for that these days?",
+      "ff", "It doesn’t matter why you need to know how to make a DIY ceiling plant holder, just that you need it now and very soon.",
+      "g", "So this has left you with no choice.",
+      "h", "It is time for <b>THAT</b> thing.",
+      "i", "");
+
+    function mouseClicked() {
+      if (counter != narration.length)
+      {
+        document.getElementById("story").innerHTML = narration[counter];
+        counter++;
+      }
+    }
+  </script>
 </body>
 
 </html>
