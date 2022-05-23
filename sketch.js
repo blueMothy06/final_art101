@@ -25,7 +25,7 @@ let compass;
 let amazing;
 
 let myFont;
-let mode = 'titlePage';
+let mode = 'amaze';
 
 //buttons
 let close;
@@ -37,6 +37,7 @@ let ad1;
 let toaster;
 let depan;
 let thing;
+let buy;
 
 // arrays
 
@@ -68,6 +69,7 @@ function preload() {
   searchBar = loadImage('assets/buttons/searchBar.png');
   link = loadImage('assets/buttons/result_link.png');
   thing = loadImage('assets/thing.png');
+  buy = loadImage('assets/buttons/buy.png');
 }
 
 function setup() {
@@ -180,6 +182,34 @@ function setup() {
     if (pause === true) {
       mode = 'comp';
     }
+  }
+
+  //buy
+  clickBuy = new Clickable();
+  clickBuy.text = "";
+  clickBuy.image = buy;
+  clickBuy.locate(630, 540);
+  clickBuy.resize(100, 50);
+  clickBuy.strokeWeight = 0;
+
+  clickBuy.onHover = function() {
+    clickBuy.imageScale = 1.1;
+  }
+
+  clickBuy.onOutside = function() {
+    clickBuy.imageScale = 1;
+  }
+
+  clickBuy.onRelease = function() {
+    num++;
+    if (num === 11) {
+      mode = 'end';
+    } else {
+
+      mode = 'amaze';
+
+    }
+    print("Nums:" + num);
   }
 
   //close
@@ -327,6 +357,7 @@ function compassPage() {
 
 function amazingPage() {
   background(amazing);
+  clickBuy.draw();
 }
 
 function keyPressed() {
@@ -342,17 +373,15 @@ function keyPressed() {
     } else if (counter === 26) {
       pause = true;
       counter++;
-    }
-    else if (counter === 36) {
+    } else if (counter === 36) {
       pause = true;
-    }
-    else if (counter > 46 && counter < 53) {
+    } else if (counter > 46 && counter < 53) {
       mode = 'amaze';
     }
     if (pause != true) {
       if (counter < narration.length) {
         document.getElementById("story").innerHTML = narration[counter];
-        counter+=1;
+        counter += 1;
       } else {
         mode = 'end';
       }

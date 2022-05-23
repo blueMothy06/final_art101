@@ -52,11 +52,7 @@
       "x", "WHYDOESITCOSTSOMUCH",
       "y", "And there's 14 PEOPLE --",
       "z", "Okay, don't panic, me. This is what you've been training for your whole life.",
-      "aa",
-      "bb",
-      "cc",
-      "dd",
-      "ee");
+      "aa", "CLICK UNTIL I GET IT");
 
     function mouseClicked() {
       if (counter === 1) {
@@ -76,13 +72,12 @@
       }
       else if (counter > 46 && counter < 53) {
         mode = 'amaze';
+        pause = true;
       }
       if (pause != true) {
         if (counter < narration.length) {
           document.getElementById("story").innerHTML = narration[counter];
           counter+=1;
-        } else {
-          mode = 'end';
         }
       }
       print('The value of counter is ' + counter);
