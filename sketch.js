@@ -1,5 +1,6 @@
 let myCanvas;
-
+let num = 0;
+let searchON = false;
 //let ram = random(50, 450);
 
 //ads
@@ -9,8 +10,11 @@ let horrorMov;
 // bgs
 let title;
 let endPage;
+let first;
+let com;
 let home;
 let results;
+let compass
 let amazing;
 
 let myFont;
@@ -32,11 +36,13 @@ function preload() {
   results = loadImage('assets/results.png');
   close = loadImage('assets/close.png');
 
+  first = loadImage('assets/first.png');
+  com = loadImage('assets/computer.png');
   amazing = loadImage('assets/amazing.png');
 
   //ads
- horrorMov = loadImage('assets/ad3.png');
-//  ghost = loadImage('assets/ads/ad1.png');
+  horrorMov = loadImage('assets/viktor.png');
+  //  ghost = loadImage('assets/ads/ad1.png');
 
   //texting set 1
   searchOne[0] = loadImage('assets/text/search01.png');
@@ -108,6 +114,12 @@ function draw() {
     case 'ending':
       ending();
       break;
+    case 'first':
+      first_screen();
+      break;
+    case 'com':
+      computer();
+      break;
     case 'homePage':
       homePage();
       break;
@@ -125,12 +137,33 @@ function ending() {
   background(endPage);
 }
 
+function first_screen() {
+  background(first);
+}
+
+function computer() {
+  background(com);
+}
+
 function homePage() {
   background(home);
+  searchON = true;
   searchBut.draw();
 }
 
 function searchResults() {
   background(results);
   ad1.draw();
+}
+
+function keyPressed() {
+  if (searchON === true) {
+    image(searchOne[num], 0, 0);
+    if (num != searchOne.length) {
+      num++;
+    }
+  } else {
+    mode = 'ending';
+  }
+
 }

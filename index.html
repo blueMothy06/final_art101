@@ -36,6 +36,14 @@
       "i", "Here goes nothing.");
 
     function mouseClicked() {
+      if (counter === 1)
+      {
+        mode = 'first';
+      }
+      else if (counter === 14)
+      {
+        mod = 'com';
+      }
       if (counter != narration.length)
       {
         document.getElementById("story").innerHTML = narration[counter];
