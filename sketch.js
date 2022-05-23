@@ -25,7 +25,7 @@ let compass;
 let amazing;
 
 let myFont;
-let mode = 'amaze';
+let mode = 'titlePage';
 
 //buttons
 let close;
