@@ -1,7 +1,11 @@
 let myCanvas;
 let num = 0;
 let searchON = false;
+let pause = false;
 //let ram = random(50, 450);
+
+//loading
+let loadWidth = 20;
 
 //ads
 let horrorMov;
@@ -12,21 +16,23 @@ let title;
 let endPage;
 let first;
 let com;
+let load;
 let home;
 let results;
 let compass
 let amazing;
 
 let myFont;
-let mode = 'titlePage';
+let mode = 'loading';
 
 //buttons
 let close;
 let searchBut;
+let heart;
 let ad1;
 
 // arrays
-let searchOne = [];
+
 
 function preload() {
   myFont = loadFont('JosefinSans-Light.ttf');
@@ -34,32 +40,19 @@ function preload() {
   endPage = loadImage('assets/end.png');
   home = loadImage('assets/homePage.png');
   results = loadImage('assets/results.png');
-  close = loadImage('assets/close.png');
 
   first = loadImage('assets/first.png');
   com = loadImage('assets/computer.png');
+  load = loadImage('assets/load.png');
   amazing = loadImage('assets/amazing.png');
 
   //ads
   horrorMov = loadImage('assets/viktor.png');
-  //  ghost = loadImage('assets/ads/ad1.png');
 
-  //texting set 1
-  searchOne[0] = loadImage('assets/text/search01.png');
-  searchOne[1] = loadImage('assets/text/search02.png');
-  searchOne[2] = loadImage('assets/text/search03.png');
-  searchOne[3] = loadImage('assets/text/search04.png');
-  searchOne[4] = loadImage('assets/text/search05.png');
-  searchOne[5] = loadImage('assets/text/search06.png');
-  searchOne[6] = loadImage('assets/text/search07.png');
-  searchOne[7] = loadImage('assets/text/search08.png');
-  searchOne[8] = loadImage('assets/text/search09.png');
-  searchOne[9] = loadImage('assets/text/search10.png');
-  searchOne[10] = loadImage('assets/text/search11.png');
-  searchOne[11] = loadImage('assets/text/search12.png');
-  searchOne[12] = loadImage('assets/text/search13.png');
-  searchOne[13] = loadImage('assets/text/search14.png');
-  searchOne[14] = loadImage('assets/text/search15.png');
+  // buttons
+    close = loadImage('assets/close.png');
+    heart = loadImage('assets/buttons/heart.png');
+  //  ghost = loadImage('assets/ads/ad1.png');
 }
 
 function setup() {
@@ -69,12 +62,12 @@ function setup() {
   // SEARCH BUTTON
   searchBut = new Clickable();
   searchBut.locate(20, 20);
-  //This function is ran when the clickable is hovered but not pressed.
+
   searchBut.onHover = function() {
     this.color = "#AAAAFF";
     this.textColor = "#FFFFFF";
   }
-  //This function is ran when the clickable is NOT hovered.
+
   searchBut.onOutside = function() {
     this.color = "#EEEEEE00";
     this.text = "search";
@@ -84,6 +77,34 @@ function setup() {
   searchBut.onRelease = function() {
     mode = 'searchResults';
   }
+
+
+  //click heart
+  clickHeart = new Clickable();
+  clickHeart.text = "";
+  clickHeart.image = heart;
+  clickHeart.color = "#EEEEEE00";
+  clickHeart.locate(370, 340);
+  clickHeart.resize(50, 50);
+  clickHeart.strokeWeight = 0;
+
+  clickHeart.onHover = function() {
+    ;
+    clickHeart.imageScale = 1.1;
+  }
+
+  clickHeart.onOutside = function() {
+    clickHeart.imageScale = 1;
+  }
+
+  clickHeart.onRelease = function() {
+    loadWidth+=50;
+    if (loadWidth >= 400)
+    {
+      mode = 'homePage';
+    }
+  }
+
 
   // ADS START HERE
   ad1 = new Clickable();
@@ -120,6 +141,9 @@ function draw() {
     case 'com':
       computer();
       break;
+      case 'loading':
+        loading();
+        break;
     case 'homePage':
       homePage();
       break;
@@ -143,6 +167,16 @@ function first_screen() {
 
 function computer() {
   background(com);
+}
+
+function loading(){
+  background(load);
+  clickHeart.draw();
+  push();
+    fill('#83EAF5');
+    noStroke();
+    rect(190,410,loadWidth,40);
+  pop();
 }
 
 function homePage() {

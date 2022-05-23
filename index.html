@@ -12,15 +12,15 @@
 </head>
 
 <body>
-    <div id="myCanvas">
-      <script src="sketch.js"></script>
-    </div>
+  <div id="myCanvas">
+    <script src="sketch.js"></script>
+  </div>
 
-    <p id="story">
-      <span>
-        (Click to start the story!)
-      </span>
-    </p>
+  <p id="story">
+    <span>
+      (Click to start the story!)
+    </span>
+  </p>
   <a id="button" href='art_state.html'>Artist Statement</a>
 
   <script>
@@ -33,24 +33,31 @@
       "ff", "It doesn’t matter why you need to know how to make a DIY ceiling plant holder, just that you need it now and very soon.",
       "g", "So this has left you with no choice.",
       "h", "It is time for <b>THAT</b> thing.",
-      "i", "Here goes nothing.");
+      "i", "Presenting…MOM’S OLD COMPUTER",
+      "j", "(It’s been rotting in the attic since forever)",
+      "k", "Let's boot up this old thing.",
+      "l",
+      "m",
+      "n",
+      "o",
+      "p");
 
     function mouseClicked() {
-      if (counter === 1)
-      {
+      if (counter === 1) {
         mode = 'first';
+      } else if (counter === 16) {
+        mode = 'com';
+      } else if (counter === 22) {
+        mode = 'loading';
+        pause = true;
       }
-      else if (counter === 14)
-      {
-        mod = 'com';
-      }
-      if (counter != narration.length)
-      {
-        document.getElementById("story").innerHTML = narration[counter];
-        counter++;
-      }
-      else {
-        mode = 'homePage';
+      if (pause != true) {
+        if (counter != narration.length) {
+          document.getElementById("story").innerHTML = narration[counter];
+          counter++;
+        } else {
+          mode = 'homePage';
+        }
       }
     }
   </script>
