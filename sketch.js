@@ -36,6 +36,7 @@ let link;
 let ad1;
 let toaster;
 let depan;
+let thing;
 
 // arrays
 
@@ -66,7 +67,7 @@ function preload() {
   searchButton = loadImage('assets/buttons/searchBut.png');
   searchBar = loadImage('assets/buttons/searchBar.png');
   link = loadImage('assets/buttons/result_link.png');
-  //  ghost = loadImage('assets/ads/ad1.png');
+  thing = loadImage('assets/thing.png');
 }
 
 function setup() {
@@ -179,6 +180,28 @@ function setup() {
     if (pause === true) {
       mode = 'comp';
     }
+  }
+
+  //close
+  clickThing = new Clickable();
+  clickThing.text = "";
+  clickThing.image = thing;
+  clickThing.color = "#EEEEEE00";
+  clickThing.locate(82, 310);
+  clickThing.resize(370, 280);
+  clickThing.strokeWeight = 0;
+
+  clickThing.onHover = function() {
+    clickThing.imageScale = 1.1;
+  }
+
+  clickThing.onOutside = function() {
+    clickThing.imageScale = 1;
+  }
+
+  clickThing.onRelease = function() {
+    pause = false;
+    counter = 38;
   }
 
 
@@ -297,8 +320,9 @@ function compassPage() {
     image(popup, 100, 100);
     clickClose.draw();
   } else {
-    pause = false;
+    clickThing.draw();
   }
+
 }
 
 function amazingPage() {
@@ -318,14 +342,17 @@ function keyPressed() {
     } else if (counter === 26) {
       pause = true;
       counter++;
-    } else if (counter === 36) {
+    }
+    else if (counter === 36) {
       pause = true;
-      counter++;
+    }
+    else if (counter > 46 && counter < 53) {
+      mode = 'amaze';
     }
     if (pause != true) {
-      if (counter != narration.length) {
+      if (counter < narration.length) {
         document.getElementById("story").innerHTML = narration[counter];
-        counter += 1;
+        counter+=1;
       } else {
         mode = 'end';
       }
