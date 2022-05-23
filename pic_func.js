@@ -1,16 +1,4 @@
 
-  for(let i = 0; i < 10; i++) {
-    circles[i] = new Circle(random(width), random(height), random(-3, 3), random(-3, 3));
-
-function draw() {
-  background(50);
-
-  for(let i = 0; i < circles.length; i++) {
-    circles[i].move();
-    circles[i].display();
-  }
-}
-
 class Circle {
   constructor(x, y, xSpeed, ySpeed) {
     this.x = x;

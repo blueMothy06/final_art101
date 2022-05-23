@@ -1,6 +1,7 @@
 let myCanvas;
 let num = 0;
 let pause = false;
+let popupF = false;
 //let ram = random(50, 450);
 
 //loading
@@ -8,6 +9,7 @@ let loadWidth = 20;
 
 //ads
 let horrorMov;
+let popup;
 //let ghost;
 
 // bgs
@@ -23,13 +25,14 @@ let compass;
 let amazing;
 
 let myFont;
-let mode = 'homePage';
+let mode = 'comp';
 
 //buttons
 let close;
 let searchButton;
 let searchBar;
 let heart;
+let link;
 let ad1;
 
 // arrays
@@ -46,22 +49,38 @@ function preload() {
   first = loadImage('assets/first.png');
   com = loadImage('assets/computer.png');
   load = loadImage('assets/load.png');
+  compass = loadImage('assets/compass.png');
   amazing = loadImage('assets/amazing.png');
 
   //ads
   horrorMov = loadImage('assets/viktor.png');
+  popupF = loadImage('assets/popup.png');
 
   // buttons
   close = loadImage('assets/close.png');
   heart = loadImage('assets/buttons/heart.png');
   searchButton = loadImage('assets/buttons/searchBut.png');
   searchBar = loadImage('assets/buttons/searchBar.png');
+  link = loadImage('assets/buttons/result_link.png');
   //  ghost = loadImage('assets/ads/ad1.png');
 }
 
 function setup() {
   myCanvas = createCanvas(800, 600);
   myCanvas.parent('myCanvas');
+
+  //close
+  clickClose = new Clickable();
+  clickClose.text = "";
+  clickClose.image = close;
+  clickClose.color = "#EEEEEE00";
+  clickClose.locate(85, 350);
+  clickClose.resize(490, 80);
+
+  clickClose.onRelease = function() {
+    popupF = true;
+    mode = 'comp';
+  }
 
   //SEARCH BUTTON
   searchBut = new Clickable();
@@ -82,6 +101,8 @@ function setup() {
 
   searchBut.onRelease = function() {
     mode = 'searchResults';
+    pause = false;
+    counter++;
   }
 
 
@@ -97,7 +118,6 @@ function setup() {
     mode = 'homePage2';
     pause = false;
   }
-
 
   //click heart
   clickHeart = new Clickable();
@@ -119,9 +139,32 @@ function setup() {
   clickHeart.onRelease = function() {
     loadWidth += 50;
     if (loadWidth >= 400) {
-      mode = 'homePage';
       pause = false;
       counter++;
+      mode = 'homePage';
+    }
+  }
+
+  //click link
+  clickLink = new Clickable();
+  clickLink.text = "";
+  clickLink.image = link;
+  clickLink.color = "#EEEEEE00";
+  clickLink.locate(50, 420);
+  clickLink.resize(500, 38);
+  clickLink.strokeWeight = 0;
+
+  clickLink.onHover = function() {
+    clickLink.imageScale = 1.1;
+  }
+
+  clickLink.onOutside = function() {
+    clickLink.imageScale = 1;
+  }
+
+  clickLink.onRelease = function() {
+    if (pause === true) {
+      mode = 'comp';
     }
   }
 
@@ -173,6 +216,9 @@ function draw() {
     case 'searchResults':
       searchResults();
       break;
+    case 'comp':
+      compassPage();
+      break;
   }
 }
 
@@ -196,9 +242,9 @@ function loading() {
   background(load);
   clickHeart.draw();
   push();
-    fill('#83EAF5');
-    noStroke();
-    rect(190, 410, loadWidth, 40);
+  fill('#83EAF5');
+  noStroke();
+  rect(190, 410, loadWidth, 40);
   pop();
 }
 
@@ -214,7 +260,17 @@ function homePage2() {
 
 function searchResults() {
   background(results);
+  clickLink.draw();
   ad1.draw();
+}
+
+function compassPage() {
+  background(compass);
+  if (popupF === false)
+  {
+    image(popup, 100,100);
+    clickClose.draw();
+  }
 }
 
 function keyPressed() {
@@ -226,14 +282,23 @@ function keyPressed() {
     } else if (counter === 22) {
       mode = 'loading';
       pause = true;
+      counter++;
+    } else if (counter === 26) {
+      pause = true;
+      counter++;
+    }
+    else if (counter === 36) {
+      pause = true;
+      counter++;
     }
     if (pause != true) {
       if (counter != narration.length) {
         document.getElementById("story").innerHTML = narration[counter];
-        counter++;
+        counter+=1;
       } else {
-        mode = 'homePage';
+        mode = 'end';
       }
     }
+    print('The value of counter is ' + counter);
   }
 }

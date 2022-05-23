@@ -37,10 +37,23 @@
       "j", "(It’s been rotting in the attic since forever)",
       "k", "Let's boot up this old thing.",
       "l", "Good old trusty Onyxhaven.",
-      "m",
-      "n",
-      "o",
-      "p");
+      "ll", "letsignorethattypo",
+      "m", "Huh.",
+      "n", "That lady's still warning people about grass?",
+      "o", "I eat grass all the time.",
+      "p", "Don't see why people like her are making such a big deal about.",
+      "q", "Anyway, I see a link right at the bottom for exactly what I need.",
+      "r",
+      "s",
+      "t",
+      "u",
+      "v",
+      "w",
+      "x",
+      "y",
+      "z",
+      "aa",
+      "bb");
 
     function mouseClicked() {
       if (counter === 1) {
@@ -50,15 +63,23 @@
       } else if (counter === 22) {
         mode = 'loading';
         pause = true;
+        counter++;
+      } else if (counter === 26) {
+        pause = true;
+        counter++;
+      }
+      else if (counter === 36) {
+        pause = true;
       }
       if (pause != true) {
         if (counter != narration.length) {
           document.getElementById("story").innerHTML = narration[counter];
-          counter++;
+          counter+=1;
         } else {
           mode = 'end';
         }
       }
+      print('The value of counter is ' + counter);
     }
   </script>
 </body>
