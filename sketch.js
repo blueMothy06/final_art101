@@ -1,6 +1,5 @@
 let myCanvas;
 let num = 0;
-let searchON = false;
 let pause = false;
 //let ram = random(50, 450);
 
@@ -18,16 +17,18 @@ let first;
 let com;
 let load;
 let home;
+let home2;
 let results;
-let compass
+let compass;
 let amazing;
 
 let myFont;
-let mode = 'loading';
+let mode = 'homePage';
 
 //buttons
 let close;
-let searchBut;
+let searchButton;
+let searchBar;
 let heart;
 let ad1;
 
@@ -39,6 +40,7 @@ function preload() {
   title = loadImage('assets/title.png');
   endPage = loadImage('assets/end.png');
   home = loadImage('assets/homePage.png');
+  home2 = loadImage('assets/homePage2.png');
   results = loadImage('assets/results.png');
 
   first = loadImage('assets/first.png');
@@ -50,8 +52,10 @@ function preload() {
   horrorMov = loadImage('assets/viktor.png');
 
   // buttons
-    close = loadImage('assets/close.png');
-    heart = loadImage('assets/buttons/heart.png');
+  close = loadImage('assets/close.png');
+  heart = loadImage('assets/buttons/heart.png');
+  searchButton = loadImage('assets/buttons/searchBut.png');
+  searchBar = loadImage('assets/buttons/searchBar.png');
   //  ghost = loadImage('assets/ads/ad1.png');
 }
 
@@ -59,23 +63,39 @@ function setup() {
   myCanvas = createCanvas(800, 600);
   myCanvas.parent('myCanvas');
 
-  // SEARCH BUTTON
+  //SEARCH BUTTON
   searchBut = new Clickable();
-  searchBut.locate(20, 20);
+  searchBut.text = "";
+  searchBut.image = searchButton;
+  searchBut.color = "#EEEEEE00";
+  searchBut.locate(580, 350);
+  searchBut.strokeWeight = 0;
+  searchBut.resize(170, 70);
 
   searchBut.onHover = function() {
-    this.color = "#AAAAFF";
-    this.textColor = "#FFFFFF";
+    searchBut.imageScale = 1.1;
   }
 
   searchBut.onOutside = function() {
-    this.color = "#EEEEEE00";
-    this.text = "search";
-    this.textColor = "#000000";
+    searchBut.imageScale = 1;
   }
 
   searchBut.onRelease = function() {
     mode = 'searchResults';
+  }
+
+
+  //searchBar
+  clickBar = new Clickable();
+  clickBar.text = "";
+  clickBar.image = searchBar;
+  clickBar.color = "#EEEEEE00";
+  clickBar.locate(85, 350);
+  clickBar.resize(490, 80);
+
+  clickBar.onRelease = function() {
+    mode = 'homePage2';
+    pause = false;
   }
 
 
@@ -89,7 +109,6 @@ function setup() {
   clickHeart.strokeWeight = 0;
 
   clickHeart.onHover = function() {
-    ;
     clickHeart.imageScale = 1.1;
   }
 
@@ -98,10 +117,11 @@ function setup() {
   }
 
   clickHeart.onRelease = function() {
-    loadWidth+=50;
-    if (loadWidth >= 400)
-    {
+    loadWidth += 50;
+    if (loadWidth >= 400) {
       mode = 'homePage';
+      pause = false;
+      counter++;
     }
   }
 
@@ -141,11 +161,14 @@ function draw() {
     case 'com':
       computer();
       break;
-      case 'loading':
-        loading();
-        break;
+    case 'loading':
+      loading();
+      break;
     case 'homePage':
       homePage();
+      break;
+    case 'homePage2':
+      homePage2();
       break;
     case 'searchResults':
       searchResults();
@@ -169,19 +192,23 @@ function computer() {
   background(com);
 }
 
-function loading(){
+function loading() {
   background(load);
   clickHeart.draw();
   push();
     fill('#83EAF5');
     noStroke();
-    rect(190,410,loadWidth,40);
+    rect(190, 410, loadWidth, 40);
   pop();
 }
 
 function homePage() {
   background(home);
-  searchON = true;
+  clickBar.draw();
+}
+
+function homePage2() {
+  background(home2);
   searchBut.draw();
 }
 
@@ -191,13 +218,22 @@ function searchResults() {
 }
 
 function keyPressed() {
-  if (searchON === true) {
-    image(searchOne[num], 0, 0);
-    if (num != searchOne.length) {
-      num++;
+  if (key == ' ') {
+    if (counter === 1) {
+      mode = 'first';
+    } else if (counter === 16) {
+      mode = 'com';
+    } else if (counter === 22) {
+      mode = 'loading';
+      pause = true;
     }
-  } else {
-    mode = 'ending';
+    if (pause != true) {
+      if (counter != narration.length) {
+        document.getElementById("story").innerHTML = narration[counter];
+        counter++;
+      } else {
+        mode = 'homePage';
+      }
+    }
   }
-
 }

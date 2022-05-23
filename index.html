@@ -18,7 +18,7 @@
 
   <p id="story">
     <span>
-      (Click to start the story!)
+      (Click or use the spacebar to start the story!)
     </span>
   </p>
   <a id="button" href='art_state.html'>Artist Statement</a>
@@ -36,7 +36,7 @@
       "i", "Presenting…MOM’S OLD COMPUTER",
       "j", "(It’s been rotting in the attic since forever)",
       "k", "Let's boot up this old thing.",
-      "l",
+      "l", "Good old trusty Onyxhaven.",
       "m",
       "n",
       "o",
@@ -56,7 +56,7 @@
           document.getElementById("story").innerHTML = narration[counter];
           counter++;
         } else {
-          mode = 'homePage';
+          mode = 'end';
         }
       }
     }
