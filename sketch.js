@@ -54,7 +54,7 @@ function preload() {
 
   //ads
   horrorMov = loadImage('assets/viktor.png');
-  popupF = loadImage('assets/popup.png');
+  popup = loadImage('assets/popup.png');
 
   // buttons
   close = loadImage('assets/close.png');
@@ -74,8 +74,17 @@ function setup() {
   clickClose.text = "";
   clickClose.image = close;
   clickClose.color = "#EEEEEE00";
-  clickClose.locate(85, 350);
-  clickClose.resize(490, 80);
+  clickClose.locate(630, 80);
+  clickClose.resize(50, 50);
+  clickClose.strokeWeight = 0;
+
+  clickClose.onHover = function() {
+    clickClose.imageScale = 1.1;
+  }
+
+  clickClose.onOutside = function() {
+    clickClose.imageScale = 1;
+  }
 
   clickClose.onRelease = function() {
     popupF = true;
@@ -171,19 +180,11 @@ function setup() {
 
   // ADS START HERE
   ad1 = new Clickable();
-  ad1.locate(20, 20);
-  //This function is ran when the clickable is hovered but not pressed.
-  ad1.onHover = function() {
-    this.color = "#AAAAFF";
-    this.textColor = "#FFFFFF";
-    this.text = "click ad?";
-  }
-  //This function is ran when the clickable is NOT hovered.
-  ad1.onOutside = function() {
-    this.color = "#EEEEEE00";
-    this.text = "Ad 1";
-    this.textColor = "#000000";
-  }
+  ad1.text = "";
+  ad1.image = horrorMov;
+  ad1.locate(620, 180);
+  ad1.resize(150,300);
+  ad1.strokeWeight = 0;
 
   ad1.onRelease = function() {
     this.x += 50;
@@ -266,11 +267,11 @@ function searchResults() {
 
 function compassPage() {
   background(compass);
-  if (popupF === false)
-  {
-    image(popup, 100,100);
+  if (popupF === false) {
+    image(popup, 100, 100);
     clickClose.draw();
   }
+
 }
 
 function keyPressed() {
@@ -286,15 +287,14 @@ function keyPressed() {
     } else if (counter === 26) {
       pause = true;
       counter++;
-    }
-    else if (counter === 36) {
+    } else if (counter === 36) {
       pause = true;
       counter++;
     }
     if (pause != true) {
       if (counter != narration.length) {
         document.getElementById("story").innerHTML = narration[counter];
-        counter+=1;
+        counter += 1;
       } else {
         mode = 'end';
       }
