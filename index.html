@@ -41,13 +41,13 @@
       "m", "Huh.",
       "n", "That lady's still warning people about grass?",
       "o", "I eat grass all the time.",
-      "p", "Don't see why people like her are making such a big deal about.",
+      "p", "Don't see why people like her are making such a big fuss about it.",
       "q", "Anyway, I see a link right at the bottom for exactly what I need.",
-      "r",
-      "s",
-      "t",
-      "u",
-      "v",
+      "r", "Alright, Compass, what do you have for me?",
+      "s", "That's it? One highly ambiguous object that will solve all of my problems?",
+      "t", "...",
+      "u", "Well, I don't see anything wrong with that.",
+      "v", "I should head over to Amazing to see if I can get it right away.",
       "w",
       "x",
       "y",
@@ -71,8 +71,11 @@
       else if (counter === 36) {
         pause = true;
       }
+      else if (counter === 46) {
+        mode = 'amaze';
+      }
       if (pause != true) {
-        if (counter != narration.length) {
+        if (counter < narration.length) {
           document.getElementById("story").innerHTML = narration[counter];
           counter+=1;
         } else {

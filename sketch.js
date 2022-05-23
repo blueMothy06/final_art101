@@ -25,7 +25,7 @@ let compass;
 let amazing;
 
 let myFont;
-let mode = 'comp';
+let mode = 'titlePage';
 
 //buttons
 let close;
@@ -34,6 +34,8 @@ let searchBar;
 let heart;
 let link;
 let ad1;
+let toaster;
+let depan;
 
 // arrays
 
@@ -55,6 +57,8 @@ function preload() {
   //ads
   horrorMov = loadImage('assets/viktor.png');
   popup = loadImage('assets/popup.png');
+  toaster = loadImage('assets/toaster.png');
+  depan = loadImage('assets/depan.png');
 
   // buttons
   close = loadImage('assets/close.png');
@@ -183,12 +187,29 @@ function setup() {
   ad1.text = "";
   ad1.image = horrorMov;
   ad1.locate(620, 180);
-  ad1.resize(150,300);
+  ad1.resize(150, 300);
   ad1.strokeWeight = 0;
 
-  ad1.onRelease = function() {
-    this.x += 50;
-  }
+  // ad1.onRelease = function() {
+  //   this.x += 50;
+  // }
+
+  //toaster ad
+  ad2 = new Clickable();
+  ad2.text = "";
+  ad2.image = toaster;
+  ad2.locate(500, 180);
+  ad2.resize(200, 200);
+  ad2.strokeWeight = 0;
+
+  //depan ad
+  ad3 = new Clickable();
+  ad3.text = "";
+  ad3.image = depan;
+  ad3.locate(500, 400);
+  ad3.resize(200, 200);
+  ad3.strokeWeight = 0;
+
 }
 
 function draw() {
@@ -219,6 +240,9 @@ function draw() {
       break;
     case 'comp':
       compassPage();
+      break;
+    case 'amaze':
+      amazingPage();
       break;
   }
 }
@@ -267,11 +291,18 @@ function searchResults() {
 
 function compassPage() {
   background(compass);
+  ad2.draw();
+  ad3.draw();
   if (popupF === false) {
     image(popup, 100, 100);
     clickClose.draw();
+  } else {
+    pause = false;
   }
+}
 
+function amazingPage() {
+  background(amazing);
 }
 
 function keyPressed() {
