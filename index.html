@@ -6,13 +6,12 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="p5.min.js"></script>
   <script src="p5.clickable.js"></script>
+
   <meta charset="utf-8">
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
-  <div class="flex-container">
     <div id="myCanvas">
       <script src="sketch.js"></script>
     </div>
@@ -22,7 +21,6 @@
         (Click to start the story!)
       </span>
     </p>
-  </div>
   <a id="button" href='art_state.html'>Artist Statement</a>
 
   <script>
@@ -35,13 +33,16 @@
       "ff", "It doesn’t matter why you need to know how to make a DIY ceiling plant holder, just that you need it now and very soon.",
       "g", "So this has left you with no choice.",
       "h", "It is time for <b>THAT</b> thing.",
-      "i", "");
+      "i", "Here goes nothing.");
 
     function mouseClicked() {
       if (counter != narration.length)
       {
         document.getElementById("story").innerHTML = narration[counter];
         counter++;
+      }
+      else {
+        mode = 'homePage';
       }
     }
   </script>
