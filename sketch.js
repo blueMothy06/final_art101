@@ -203,11 +203,9 @@ function setup() {
   clickBuy.onRelease = function() {
     num++;
     if (num === 11) {
-      mode = 'end';
+      mode = 'ending';
     } else {
-
       mode = 'amaze';
-
     }
     print("Nums:" + num);
   }
@@ -383,7 +381,7 @@ function keyPressed() {
         document.getElementById("story").innerHTML = narration[counter];
         counter += 1;
       } else {
-        mode = 'end';
+        mode = 'ending';
       }
     }
     print('The value of counter is ' + counter);
